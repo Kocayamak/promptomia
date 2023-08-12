@@ -9,15 +9,14 @@ const Nav = () => {
   const isUserLoogedIn = true;
 
   const [providers, setProviders] = useState(null);
+  const [toggleDropdown, setToggleDropdown] = useState(false);
 
   useEffect(() => {
-    const setProviders = async () => {
-      const response = await getProviders();
-
-      setProviders(response);
-    };
-
-    setProviders();
+    // const setProviders = async () => {
+    //   const response = await getProviders();
+    //   setProviders(response);
+    // };
+    // setProviders();
   }, []);
 
   return (
@@ -84,11 +83,53 @@ const Nav = () => {
                 width={30}
                 height={30}
                 className="object-contain"
+                onClick={() => setToggleDropdown((prev) => !prev)}
               />
+
+              {toggleDropdown && (
+                <div className="dropdown">
+                  <Link
+                    href="/profile"
+                    className="dropdown_link"
+                    onClick={() => setToggleDropdown(false)}
+                  >
+                    Profil
+                  </Link>
+                  <Link
+                    href="/create-prompt"
+                    className="dropdown_link"
+                    onClick={() => setToggleDropdown(false)}
+                  >
+                    Post Oluştur
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setToggleDropdown(false);
+                      signOut();
+                    }}
+                    className="mt-5 w-full black_btn"
+                  >
+                    Çıkış Yap
+                  </button>
+                </div>
+              )}
             </div>
           </>
         ) : (
-          <></>
+          <>
+            {providers &&
+              Object.values(providers).map((provider) => (
+                <button
+                  type="button"
+                  key={provider.name}
+                  onClick={() => signIn(provider.id)}
+                  className="black_btn"
+                >
+                  Giriş Yap
+                </button>
+              ))}
+          </>
         )}
       </div>
     </nav>
