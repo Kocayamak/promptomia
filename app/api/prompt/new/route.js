@@ -1,13 +1,15 @@
 import { connectToDatabase } from "@utils/database";
 import Prompt from "@models/prompt";
 
-export const POST = async (req) => {
-    console.log("req", req.body)
-    const {userId, prompt, tag} = req.body;
-    console.log("userId", userId);
-    console.log("prompt", prompt);
-    console.log("tag", tag);
+export const config = {
+    api: {
+      bodyParser: true,
+    },
+};
 
+export const POST = async (req) => {
+    const {userId, prompt, tag} =  await req.json();
+    
     try{
         await connectToDatabase();
 
