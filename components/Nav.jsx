@@ -51,7 +51,7 @@ const Nav = () => {
                   alt="Profile"
                   width={30}
                   height={30}
-                  className="object-contain"
+                  className="object-contain rounded-full"
                 />
               </Link>
             </div>
@@ -83,7 +83,7 @@ const Nav = () => {
                 alt="Profile"
                 width={30}
                 height={30}
-                className="object-contain"
+                className="object-contain rounded-full"
                 onClick={() => setToggleDropdown((prev) => !prev)}
               />
 
